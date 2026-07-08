@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tech with Zach</title>
+  <link rel="icon" href="favicon.png">
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #020617);
+      margin: 0;
+      padding: 0;
+      color: #e5e7eb;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(2, 6, 23, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .hamburger {
+      display: none;
+      background: transparent;
+      border: none;
+      color: #cbd5f5;
+      font-size: 28px;
+      cursor: pointer;
+      padding: 5px;
+      transition: color 0.3s ease;
+    }
+
+    .hamburger:hover {
+      color: #38bdf8;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(2, 6, 23, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 12px 0;
+        margin: 0;
+        border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+      }
+
+      .nav-links a:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #e5e7eb;
+    }
+
+    .nav-logo span {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #f4682b, #d61818);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #cbd5f5;
+      text-decoration: none;
+      margin-left: 16px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #38bdf8;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      animation: fadeDown 1s ease-out;
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 10px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #f4682b, #d61818);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: bold;
+      color: white;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    section {
+      max-width: 800px;
+      margin: 20px auto;
+      background: rgba(15, 23, 42, 0.9);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      animation: fadeUp 1s ease-out;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #38bdf8;
+      margin-top: 0;
+    }
+
+    ul {
+      line-height: 1.8;
+    }
+
+    li::marker {
+      color: #22d3ee;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #a5f3fc;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .pricing-card {
+      background: rgba(15, 23, 42, 0.7);
+      padding: 20px;
+      border-radius: 12px;
+      margin: 15px 0;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .pricing-card:hover {
+      border-color: #38bdf8;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .pricing-card h3 {
+      margin-top: 0;
+      color: #38bdf8;
+    }
+
+    .faq-item {
+      background: rgba(15, 23, 42, 0.7);
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #38bdf8;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item:hover {
+      background: rgba(15, 23, 42, 0.95);
+      transform: translateX(5px);
+    }
+
+    .faq-question {
+      font-weight: bold;
+      color: #38bdf8;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      color: #cbd5f5;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+      padding-top: 8px;
+    }
+
+    .faq-toggle {
+      font-size: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-toggle {
+      transform: rotate(180deg);
+    }
+
+    .contact-form {
+      background: rgba(15, 23, 42, 0.7);
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #38bdf8;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid rgba(56, 189, 248, 0.3);
+      border-radius: 8px;
+      background: rgba(2, 6, 23, 0.8);
+      color: #e5e7eb;
+      font-family: inherit;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #38bdf8;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .char-count {
+      text-align: right;
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 5px;
+    }
+
+    .char-count.warning {
+      color: #fbbf24;
+    }
+
+    .char-count.error {
+      color: #f87171;
+    }
+
+    .form-error {
+      color: #f87171;
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .form-error.show {
+      display: block;
+    }
+
+    .form-group input.invalid,
+    .form-group textarea.invalid {
+      border-color: #f87171;
+    }
+
+    .form-group input.valid,
+    .form-group textarea.valid {
+      border-color: #10b981;
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #f4682b, #d61818);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(244, 104, 43, 0.3);
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(244, 104, 43, 0.5);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #f4682b, #d61818);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(244, 104, 43, 0.5);
+    }
+
+    section {
+      transition: transform 0.3s ease;
+    }
+
+    section:hover {
+      transform: scale(1.01);
+    }
+
+    .logo {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: rotate(360deg) scale(1.1);
+    }
+
+    .nav-logo span {
+      transition: transform 0.3s ease;
+    }
+
+    .nav-logo:hover span {
+      transform: rotate(360deg);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .price {
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .hidden {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .fade-in {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .schedule-day {
+      background: rgba(15, 23, 42, 0.7);
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #38bdf8;
+    }
+
+    .schedule-day h4 {
+      color: #38bdf8;
+      margin: 0 0 10px 0;
+    }
+
+    .schedule-day p {
+      margin: 5px 0;
+      color: #cbd5f5;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .gallery-item {
+      background: rgba(15, 23, 42, 0.7);
+      padding: 20px;
+      border-radius: 12px;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover {
+      border-color: #38bdf8;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3);
+    }
+
+    .gallery-item h4 {
+      color: #38bdf8;
+      margin: 0 0 10px 0;
+    }
+
+    .gallery-item p {
+      color: #cbd5f5;
+      margin: 5px 0;
+    }
+
+    .gallery-link {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-block;
+      margin-top: 10px;
+      transition: color 0.3s ease;
+    }
+
+    .gallery-link:hover {
+      color: #22d3ee;
+    }
+
+    footer {
+      background: rgba(2, 6, 23, 0.9);
+      padding: 40px 20px;
+      margin-top: 60px;
+      text-align: center;
+      border-top: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .footer-links a {
+      color: #cbd5f5;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #38bdf8;
+    }
+
+    .footer-copyright {
+      color: #94a3b8;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    .iframe-error {
+      background: rgba(15, 23, 42, 0.9);
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      color: #94a3b8;
+      border: 2px solid rgba(248, 113, 113, 0.3);
+      display: none;
+    }
+
+    .iframe-error.show {
+      display: block;
+    }
+
+    section {
+      scroll-margin-top: 80px;
+    }
+  </style>
+</head>
+<body>
+
+<nav role="navigation" aria-label="Main navigation">
+  <div class="nav-logo">
+    <span>Z</span>
+    Zach Tech
+  </div>
+  <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" id="hamburgerBtn" onclick="toggleMobileMenu()">☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="#services" aria-label="Services section">Services</a>
+    <a href="#pricing" aria-label="Pricing section">Pricing</a>
+    <a href="#projects" aria-label="Lessons section">Lessons</a>
+    <a href="#demo" aria-label="Free trial section">Trial</a>
+    <a href="#gallery" aria-label="Student gallery section">Gallery</a>
+    <a href="#faq" aria-label="FAQ section">FAQ</a>
+    <a href="#schedule" aria-label="Schedule section">Schedule</a>
+    <a href="#about" aria-label="About section">About</a>
+    <a href="#contact" aria-label="Contact section">Contact</a>
+    <a href="admin.html" aria-label="Admin page">Admin</a>
+  </div>
+</nav>
+
+<header>
+  <div class="logo">Z</div>
+  <h1>Tech Help by Zach</h1>
+  <p>Friendly, reliable tech help from a kid who loves technology</p>
+</header>
+
+<section id="services">
+  <h2>What I Can Help With</h2>
+  <ul>
+    <li>Organizing photos, files, and apps</li>
+    <li>Teaching Scratch and beginner coding</li>
+  </ul>
+</section>
+
+<section id="pricing">
+  <h2>Lesson Plans & Pricing</h2>
+
+  <div class="pricing-card" onclick="selectPricing(this, 'single')">
+    <h3>Single Lesson</h3>
+    <p class="price">$15 per course</p>
+    <ul>
+      <li>Learn HTML, CSS, <em>or</em> JavaScript basics</li>
+      <li>One-on-one help</li>
+      <li>Perfect for beginners or people just trying it out</li>
+    </ul>
+  </div>
+
+  <div class="pricing-card" onclick="selectPricing(this, 'bundle')">
+    <h3>Web Builder Bundle ⭐</h3>
+    <p class="price">$35 total (All 3 courses) Save $10</p>
+    <ul>
+      <li>HTML: Build the structure of a website</li>
+      <li>CSS: Style your website with colors, fonts, and layout</li>
+      <li>JavaScript: Add buttons, alerts, and interactivity</li>
+      <li>End result: A complete all about me website complete with button actions, css styles, and lots of customization.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Lesson Plans</h2>
+  <p>Here is what students will learn step-by-step:</p>
+
+  <h3>HTML Basics (Structure)</h3>
+  <ul>
+    <li>What HTML is and how websites work</li>
+    <li>Headings, paragraphs, and lists</li>
+    <li>Images and links</li>
+    <li>Build a simple personal website</li>
+  </ul>
+
+  <h3>CSS Basics (Style)</h3>
+  <ul>
+    <li>Colors, fonts, and backgrounds</li>
+    <li>Borders, rounded corners, and layout</li>
+    <li>Make the website look modern and clean</li>
+  </ul>
+
+  <h3>JavaScript Basics (Interactivity)</h3>
+  <ul>
+    <li>What JavaScript does</li>
+    <li>Buttons and click actions</li>
+    <li>Alerts and changing text</li>
+    <li>Create a fun interactive feature</li>
+  </ul>
+</section>
+
+<section id="demo">
+  <h2>Free Trial</h2>
+  <p>This is my free trial website that I can teach your kid how to make.</p>
+  <p>They can see if they like coding and want to take the classes.</p>
+
+  <iframe 
+    src="demo-site.html" 
+    width="100%" 
+    height="400" 
+    style="border: 2px solid #38bdf8; border-radius: 12px; background: rgb(235, 178, 239);"
+    title="Demo website preview"
+    id="demoIframe"
+    onerror="handleIframeError()">
+  </iframe>
+  <div class="iframe-error" id="iframeError">
+    <p>Unable to load demo site. Please <a href="demo-site.html" target="_blank">click here</a> to view it in a new window.</p>
+  </div>
+</section>
+
+<section id="gallery">
+  <h2>Student Work Gallery</h2>
+  <p>Check out some of the amazing websites my students have created!</p>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <h4>Personal Website Project</h4>
+      <p>A complete "About Me" website with interactive features, styled with CSS, and custom JavaScript buttons.</p>
+      <p><strong>Student:</strong> Created in Web Builder Bundle</p>
+      <a href="my-site.html" class="gallery-link" target="_blank" aria-label="View demo site">View Example →</a>
+    </div>
+    <div class="gallery-item">
+      <h4>Coming Soon!</h4>
+      <p>More student projects will be showcased here as students complete their websites.</p>
+      <p>Sign up for a chance to be the next one featured!</p>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <h2>About Me</h2>
+  <p>
+    Hi! I'm an 11-year-old who loves coding, organizing, and helping people with technology.
+    I'm very patient and responsible.
+  </p>
+  <p>
+    <strong>Tech Skills:</strong> I can build basic HTML websites, style them using CSS, and add some interactivity with JavaScript.
+  </p>
+</section>
+
+<section id="faq">
+  <h2>FAQ</h2>
+  <div class="faq-item" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false" onkeypress="if(event.key==='Enter') toggleFaq(this)">
+    <div class="faq-question">
+      <span>What age is this for?</span>
+      <span class="faq-toggle" aria-hidden="true">▼</span>
+    </div>
+    <div class="faq-answer">Best for ages 8-12.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false" onkeypress="if(event.key==='Enter') toggleFaq(this)">
+    <div class="faq-question">
+      <span>Do kids need coding experience?</span>
+      <span class="faq-toggle" aria-hidden="true">▼</span>
+    </div>
+    <div class="faq-answer">No experience needed. Beginners are always welcome.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false" onkeypress="if(event.key==='Enter') toggleFaq(this)">
+    <div class="faq-question">
+      <span>What do kids need?</span>
+      <span class="faq-toggle" aria-hidden="true">▼</span>
+    </div>
+    <div class="faq-answer">Just a computer! (Internet is supplied)</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false" onkeypress="if(event.key==='Enter') toggleFaq(this)">
+    <div class="faq-question">
+      <span>How long is each lesson?</span>
+      <span class="faq-toggle" aria-hidden="true">▼</span>
+    </div>
+    <div class="faq-answer">Around 15-30 minutes.</div>
+  </div>
+</section>
+
+<section id="schedule">
+  <h2>Schedule & Availability</h2>
+  <p>
+    Lessons are available after school and on weekends. All times are in Eastern Time (ET).
+  </p>
+  <div class="schedule-grid">
+    <div class="schedule-day">
+      <h4>Monday - Friday</h4>
+      <p><strong>After School:</strong></p>
+      <p>5:15 PM - 7:30 PM ET</p>
+    </div>
+    <div class="schedule-day">
+      <h4>Saturday</h4>
+      <p><strong>Morning:</strong> 11:00 AM - 1:00 PM ET</p>
+      <p><strong>Afternoon:</strong> 3:00 PM - 5:00 PM ET</p>
+    </div>
+    <div class="schedule-day">
+      <h4>Sunday</h4>
+      <p><strong>Afternoon:</strong> 2:00 PM - 4:00 PM ET</p>
+    </div>
+  </div>
+  <p style="margin-top: 20px; color: #94a3b8;">
+    <em>Please contact me to schedule a specific time that works for you!</em>
+  </p>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p>
+    Ask a parent or guardian to contact me for scheduling.<br>My phone number is <a href="tel:571-481-0357" aria-label="Call 571-481-0357" style="color: #38bdf8; text-decoration: none;">571-481-0357</a>.
+  </p>
+  <div class="contact-form">
+    <form onsubmit="handleContact(event)" role="form" aria-label="Contact form">
+      <div class="form-group">
+        <label for="name">Name (Parent/Guardian)</label>
+        <input type="text" id="name" name="name" required aria-required="true" aria-describedby="name-error" oninput="validateName(this)">
+        <div class="form-error" id="name-error" role="alert"></div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required aria-required="true" aria-describedby="email-error" oninput="validateEmail(this)">
+        <div class="form-error" id="email-error" role="alert"></div>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Tell me about your child and what they'd like to learn!" required aria-required="true" aria-describedby="message-error message-count" maxlength="1000" oninput="validateMessage(this)"></textarea>
+        <div class="char-count" id="message-count">0 / 1000 characters</div>
+        <div class="form-error" id="message-error" role="alert"></div>
+      </div>
+      <button type="submit" class="submit-btn" id="submitBtn" aria-label="Submit contact form">Send Message</button>
+    </form>
+    <p id="form-message" style="margin-top: 15px; color: #38bdf8; display: none;" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
+<button class="scroll-top" onclick="scrollToTop()" id="scrollTopBtn" aria-label="Scroll to top">↑</button>
+
+<footer role="contentinfo">
+  <div class="footer-content">
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#projects">Lessons</a>
+      <a href="#faq">FAQ</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-copyright">
+      <p>&copy; 2026 Tech Help by Zach. All rights reserved.</p>
+      <p>For questions or support, please contact: <a href="tel:571-481-0357" style="color: #38bdf8;">571-481-0357</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile Menu Toggle
+  function toggleMobileMenu() {
+    const navLinks = document.getElementById('navLinks');
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const isActive = navLinks.classList.toggle('active');
+    hamburgerBtn.setAttribute('aria-expanded', isActive);
+  }
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const nav = document.querySelector('nav');
+    const navLinks = document.getElementById('navLinks');
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    
+    if (window.innerWidth <= 768 && navLinks.classList.contains('active')) {
+      if (!nav.contains(event.target)) {
+        navLinks.classList.remove('active');
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+      }
+    }
+  });
+
+  // Close mobile menu when clicking a link
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', function() {
+      if (window.innerWidth <= 768) {
+        const navLinks = document.getElementById('navLinks');
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        navLinks.classList.remove('active');
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  // FAQ Toggle Function
+  function toggleFaq(element) {
+    const isActive = element.classList.toggle('active');
+    element.setAttribute('aria-expanded', isActive);
+  }
+
+  // Pricing Selection
+  function selectPricing(element, type) {
+    const cards = document.querySelectorAll('.pricing-card');
+    cards.forEach(card => card.style.border = '2px solid transparent');
+    element.style.border = '2px solid #38bdf8';
+    
+    // You could add more functionality here, like highlighting the selected option
+    setTimeout(() => {
+      element.style.border = '';
+    }, 1000);
+  }
+
+  // Scroll to Top Button
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  // Show/Hide Scroll to Top Button
+  window.addEventListener('scroll', function() {
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    if (window.pageYOffset > 300) {
+      scrollTopBtn.classList.add('visible');
+    } else {
+      scrollTopBtn.classList.remove('visible');
+    }
+  });
+
+  // Form Validation Functions
+  function validateName(input) {
+    const errorEl = document.getElementById('name-error');
+    const value = input.value.trim();
+    
+    if (value.length < 2) {
+      input.classList.add('invalid');
+      input.classList.remove('valid');
+      errorEl.textContent = 'Name must be at least 2 characters';
+      errorEl.classList.add('show');
+      return false;
+    } else {
+      input.classList.add('valid');
+      input.classList.remove('invalid');
+      errorEl.classList.remove('show');
+      return true;
+    }
+  }
+
+  function validateEmail(input) {
+    const errorEl = document.getElementById('email-error');
+    const value = input.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (!emailRegex.test(value)) {
+      input.classList.add('invalid');
+      input.classList.remove('valid');
+      errorEl.textContent = 'Please enter a valid email address';
+      errorEl.classList.add('show');
+      return false;
+    } else {
+      input.classList.add('valid');
+      input.classList.remove('invalid');
+      errorEl.classList.remove('show');
+      return true;
+    }
+  }
+
+  function validateMessage(textarea) {
+    const errorEl = document.getElementById('message-error');
+    const countEl = document.getElementById('message-count');
+    const value = textarea.value;
+    const charCount = value.length;
+    const maxLength = 1000;
+    
+    countEl.textContent = `${charCount} / ${maxLength} characters`;
+    
+    if (charCount > maxLength) {
+      countEl.classList.add('error');
+      countEl.classList.remove('warning');
+    } else if (charCount > maxLength * 0.9) {
+      countEl.classList.add('warning');
+      countEl.classList.remove('error');
+    } else {
+      countEl.classList.remove('warning', 'error');
+    }
+    
+    if (charCount < 10) {
+      textarea.classList.add('invalid');
+      textarea.classList.remove('valid');
+      errorEl.textContent = 'Message must be at least 10 characters';
+      errorEl.classList.add('show');
+      return false;
+    } else if (charCount > maxLength) {
+      textarea.classList.add('invalid');
+      textarea.classList.remove('valid');
+      errorEl.textContent = `Message must be ${maxLength} characters or less`;
+      errorEl.classList.add('show');
+      return false;
+    } else {
+      textarea.classList.add('valid');
+      textarea.classList.remove('invalid');
+      errorEl.classList.remove('show');
+      return true;
+    }
+  }
+
+  // Contact Form Handler
+  function handleContact(event) {
+    event.preventDefault();
+    const form = event.target;
+    const submitBtn = document.getElementById('submitBtn');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+    const formMessage = document.getElementById('form-message');
+    
+    // Validate all fields
+    const isNameValid = validateName(nameInput);
+    const isEmailValid = validateEmail(emailInput);
+    const isMessageValid = validateMessage(messageInput);
+    
+    if (!isNameValid || !isEmailValid || !isMessageValid) {
+      formMessage.textContent = 'Please fix the errors in the form before submitting.';
+      formMessage.style.color = '#f87171';
+      formMessage.style.display = 'block';
+      return;
+    }
+    
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const message = messageInput.value.trim();
+    
+    // Disable submit button
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+    
+    try {
+      // Save submission to localStorage
+      const submission = {
+        id: Date.now(),
+        name: name,
+        email: email,
+        message: message,
+        date: new Date().toISOString()
+      };
+      
+      // Get existing submissions or create new array
+      let submissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
+      submissions.push(submission);
+      localStorage.setItem('contactSubmissions', JSON.stringify(submissions));
+      
+      // Show success message
+      formMessage.textContent = `Thanks ${name}! Your message has been received. I'll contact you at ${email} soon!`;
+      formMessage.style.display = 'block';
+      formMessage.style.color = '#38bdf8';
+      
+      // Reset form
+      form.reset();
+      document.getElementById('message-count').textContent = '0 / 1000 characters';
+      document.getElementById('message-count').classList.remove('warning', 'error');
+      
+      // Remove validation classes
+      nameInput.classList.remove('valid', 'invalid');
+      emailInput.classList.remove('valid', 'invalid');
+      messageInput.classList.remove('valid', 'invalid');
+      
+      // Hide message after 5 seconds
+      setTimeout(() => {
+        formMessage.style.display = 'none';
+      }, 5000);
+    } catch (error) {
+      // Handle localStorage errors
+      console.error('Error saving submission:', error);
+      formMessage.textContent = 'There was an error saving your message. Please try again or contact me directly at 571-481-0357.';
+      formMessage.style.color = '#f87171';
+      formMessage.style.display = 'block';
+    } finally {
+      // Re-enable submit button
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Message';
+    }
+  }
+
+  // Iframe Error Handling
+  function handleIframeError() {
+    const iframe = document.getElementById('demoIframe');
+    const errorDiv = document.getElementById('iframeError');
+    if (iframe && errorDiv) {
+      iframe.style.display = 'none';
+      errorDiv.classList.add('show');
+    }
+  }
+
+  // Check if iframe loaded successfully
+  window.addEventListener('load', function() {
+    const iframe = document.getElementById('demoIframe');
+    if (iframe) {
+      iframe.addEventListener('load', function() {
+        const errorDiv = document.getElementById('iframeError');
+        if (errorDiv) {
+          errorDiv.classList.remove('show');
+        }
+      });
+      
+      // Fallback: check after a delay
+      setTimeout(function() {
+        try {
+          // Try to access iframe content (will fail if cross-origin, but that's okay)
+          const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+          if (!iframeDoc || !iframeDoc.body) {
+            handleIframeError();
+          }
+        } catch (e) {
+          // Cross-origin or other error - this is expected, so we don't show error
+          // The iframe will show its own error if needed
+        }
+      }, 2000);
+    }
+  });
+
+  // Smooth scroll for navigation links
+  document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Intersection Observer for fade-in animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-in');
+      }
+    });
+  }, observerOptions);
+
+  // Observe all sections
+  document.querySelectorAll('section').forEach(section => {
+    observer.observe(section);
+  });
+</script>
+
+</body>
+</html>

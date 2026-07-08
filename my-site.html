@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>All about Zach</title>
+        <link class="favicon" rel="icon" href="about-me-favicon.png">
+        <style>
+            .red {
+                color: red
+            }
+
+            footer {
+                background-color: greenyellow;
+                width: 250px;
+                height: 20px;
+                border-radius: 15px;
+            }
+            body {
+                background-color: lightblue;
+            }
+            .centered {
+                text-align: center;
+            }
+            .good {
+                background-color: green;
+            }
+            .bad {
+                background-color: red;
+                color: white;
+            }
+            .verification {
+                background: linear-gradient(rgb(109, 109, 107), rgb(152, 138, 138), rgb(227, 216, 216));
+                border-color: black;
+                border-width: 3px;    
+            }
+            .highlight-yellow {
+                background-color: yellow;
+                width: 150px;
+                border-radius: 10px;
+            }
+            .cat {
+                border-top-right-radius: 50px;
+                border-bottom-right-radius: 30px;
+                border-bottom-left-radius: 20px;
+                border-top-left-radius: 1px;
+            }
+            button {
+                cursor: pointer;
+            }
+            #force-black-text {
+                color: black;
+            }
+            #footer-name {
+                color: black;
+            }
+            .light-mode-button {
+                background-color: lightblue;
+                color: black;
+            }
+            .dark-mode-button {
+                background-color: black;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <h1><b>This is all about Zach V.B.</b></h1>
+
+        <p>My name is Zach. I am 11 years old, and I like to code!</p>
+        <p>Here is a list of some of my favorite things:</p>
+
+        <ol class="highlight-yellow" id="force-black-text">
+            <li>Reading</li>
+            <li>My family</li>
+            <li>Playing fun games</li>
+            <li>Coding</li>
+        </ol>
+
+        <p class="red">My favorite color is red!<br></p>
+        <p>And I love cats!</p>
+
+        <a href="https://en.wikipedia.org/wiki/Cat">About cats</a>
+
+        <section>
+        <img class="cat" src="cat.jpg" alt="Cute Cat!">
+        </section>
+
+        <p id="change-me">I'm bored. Please change me.</p>
+
+        <button class="good" onclick= "goodClick()">Click for Good Stuff</button>
+        <button class="bad" onclick="badClick()">Click for Bad Things</button>
+        <p><br></p>
+        <section>
+        <button class="light-mode-button" onclick="lightMode()">Click for Light Mode</button>
+        <button class="dark-mode-button" onclick="darkMode()">Click for Dark Mode</button>
+        </section>
+        <p>Cool stuff ahead!</p>
+        <section>
+            <button class="verification" onclick="askName()">Click for verification</button>
+        </section>
+
+        <script>
+            function lightMode() {
+                document.body.style.backgroundColor = "lightblue";
+                document.body.style.color = "black";
+            }
+
+            function darkMode() {
+                document.body.style.backgroundColor = "black";
+                document.body.style.color = "white";
+            }
+
+            function goodClick() {
+                document.getElementById("change-me").innerText = "This website rocks!!!";
+                alert("Much better")
+            }
+
+            function badClick() {
+                document.getElementById("change-me").innerText = "This is the worst website in the world."
+                alert("That might not have been the best option...")
+            }
+
+            function askName() {
+            
+                let personReading = prompt("What is your name?")
+
+                if(personReading != null && personReading != "") {
+                    document.getElementById("footer-name").innerText = "Welcome to my site, " + personReading + "!!!";
+                }
+            }
+        </script>
+    </body>
+    <footer>
+        <p id="footer-name" class="centered">Please verify who you are</p>
+    </footer>
+</html>

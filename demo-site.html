@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .button1 {
+            color: white;
+            background-color: black;
+            border-radius: 10px;
+            border-color: greenyellow;
+            cursor: pointer;
+            border-width: 2.5px;
+        }
+
+        #pts {
+            color: orange;
+            background-color: black;
+            padding: 5px 10px;
+            display: inline-block;
+            border: 1px solid orange;
+            border-radius: 10px;
+            border-width: 2px;
+        }
+
+        .reset {
+            color: red;
+            background-color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            border: solid black;
+            border-width: 2.5px;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        <span id="pts">Points: 0</span><br><br><br>
+        <button class="button1" onclick="addPoint()">Click</button>
+        <button class="reset" onclick="resetPoints()"><b>Click to Reset Points</b></button>
+    </p>
+
+    <script>
+        var points = 0;
+        function addPoint() {
+            points++;
+            document.getElementById("pts").innerText = "Points: " + points;
+        }
+
+        function resetPoints() {
+            points = 0
+            document.getElementById("pts").innerText = "You have just reset your points. Your current points are now 0."
+        }
+    </script>
+</body>
+</html>
