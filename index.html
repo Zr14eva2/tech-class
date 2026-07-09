@@ -761,7 +761,7 @@
     Ask a parent or guardian to contact me for scheduling.<br>My phone number is <a href="tel:571-481-0357" aria-label="Call 571-481-0357" style="color: #38bdf8; text-decoration: none;">571-481-0357</a>.
   </p>
   <div class="contact-form">
-    <form action="https://formspree.io/f/mojogaro" method="POST" onsubmit="handleContact(event)" role="form" aria-label="Contact form">
+    <form onsubmit="handleContact(event)" role="form" aria-label="Contact form">
       <div class="form-group">
         <label for="name">Name (Parent/Guardian)</label>
         <input type="text" id="name" name="name" required aria-required="true" aria-describedby="name-error" oninput="validateName(this)">
@@ -782,7 +782,7 @@
     </form>
     <p id="form-message" style="margin-top: 15px; color: #38bdf8; display: none;" role="status" aria-live="polite"></p>
   </div>
-       <button class="resetFormBtn onclick="location.reload()">Reset Form</button>
+       <button class="resetFormBtn" onclick="window.location.reload();">Reset Form</button>
 </section>
 
 <button class="scroll-top" onclick="scrollToTop()" id="scrollTopBtn" aria-label="Scroll to top">↑</button>
@@ -952,8 +952,6 @@
     }
   }
 
-  // Contact Form Handler
-  function handleContact(event) {
  // Contact Form Handler
 async function handleContact(event) {
   event.preventDefault();
