@@ -739,7 +739,7 @@
     Ask a parent or guardian to contact me for scheduling.<br>My phone number is <a href="tel:571-481-0357" aria-label="Call 571-481-0357" style="color: #38bdf8; text-decoration: none;">571-481-0357</a>.
   </p>
   <div class="contact-form">
-    <form onsubmit="handleContact(event)" role="form" aria-label="Contact form">
+    <form action="https://formspree.io/f/mojogaro" method="POST" onsubmit="handleContact(event)" role="form" aria-label="Contact form">
       <div class="form-group">
         <label for="name">Name (Parent/Guardian)</label>
         <input type="text" id="name" name="name" required aria-required="true" aria-describedby="name-error" oninput="validateName(this)">
@@ -931,79 +931,64 @@
 
   // Contact Form Handler
   function handleContact(event) {
-    event.preventDefault();
-    const form = event.target;
-    const submitBtn = document.getElementById('submitBtn');
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const messageInput = document.getElementById('message');
-    const formMessage = document.getElementById('form-message');
-    
-    // Validate all fields
-    const isNameValid = validateName(nameInput);
-    const isEmailValid = validateEmail(emailInput);
-    const isMessageValid = validateMessage(messageInput);
-    
-    if (!isNameValid || !isEmailValid || !isMessageValid) {
-      formMessage.textContent = 'Please fix the errors in the form before submitting.';
-      formMessage.style.color = '#f87171';
-      formMessage.style.display = 'block';
-      return;
+async function handleContact(event) {
+  event.preventDefault();
+
+  const form = event.target;
+  const submitBtn = document.getElementById('submitBtn');
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const messageInput = document.getElementById('message');
+  const formMessage = document.getElementById('form-message');
+
+  const isNameValid = validateName(nameInput);
+  const isEmailValid = validateEmail(emailInput);
+  const isMessageValid = validateMessage(messageInput);
+
+  if (!isNameValid || !isEmailValid || !isMessageValid) {
+    formMessage.textContent = 'Please fix the errors in the form before submitting.';
+    formMessage.style.color = '#f87171';
+    formMessage.style.display = 'block';
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending...';
+
+  try {
+    const response = await fetch("https://formspree.io/f/mojogaro", {
+      method: "POST",
+      body: new FormData(form),
+      headers: {
+        Accept: "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to send");
     }
-    
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    const message = messageInput.value.trim();
-    
-    // Disable submit button
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
-    
-    try {
-      // Save submission to localStorage
-      const submission = {
-        id: Date.now(),
-        name: name,
-        email: email,
-        message: message,
-        date: new Date().toISOString()
-      };
-      
-      // Get existing submissions or create new array
-      let submissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
-      submissions.push(submission);
-      localStorage.setItem('contactSubmissions', JSON.stringify(submissions));
-      
-      // Show success message
-      formMessage.textContent = `Thanks ${name}! Your message has been received. I'll contact you at ${email} soon!`;
-      formMessage.style.display = 'block';
-      formMessage.style.color = '#38bdf8';
-      
-      // Reset form
-      form.reset();
-      document.getElementById('message-count').textContent = '0 / 1000 characters';
-      document.getElementById('message-count').classList.remove('warning', 'error');
-      
-      // Remove validation classes
-      nameInput.classList.remove('valid', 'invalid');
-      emailInput.classList.remove('valid', 'invalid');
-      messageInput.classList.remove('valid', 'invalid');
-      
-      // Hide message after 5 seconds
-      setTimeout(() => {
-        formMessage.style.display = 'none';
-      }, 5000);
-    } catch (error) {
-      // Handle localStorage errors
-      console.error('Error saving submission:', error);
-      formMessage.textContent = 'There was an error saving your message. Please try again or contact me directly at 571-481-0357.';
-      formMessage.style.color = '#f87171';
-      formMessage.style.display = 'block';
-    } finally {
-      // Re-enable submit button
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Send Message';
-    }
+
+    formMessage.textContent = "✅ Thanks! Your message has been sent!";
+    formMessage.style.color = "#10b981";
+    formMessage.style.display = "block";
+
+    form.reset();
+
+    document.getElementById("message-count").textContent = "0 / 1000 characters";
+    document.getElementById("message-count").classList.remove("warning", "error");
+
+    nameInput.classList.remove("valid", "invalid");
+    emailInput.classList.remove("valid", "invalid");
+    messageInput.classList.remove("valid", "invalid");
+  } catch (err) {
+    formMessage.textContent = "❌ Sorry, something went wrong.";
+    formMessage.style.color = "#f87171";
+    formMessage.style.display = "block";
+  }
+
+  submitBtn.disabled = false;
+  submitBtn.textContent = "Send Message";
+}
   }
 
   // Iframe Error Handling
