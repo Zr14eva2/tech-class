@@ -451,22 +451,6 @@
   <p>Registered: <span id="registered">0</span></p>
   </div>
 
-  <div class="stats">
-    <h2>Total Submissions</h2>
-    <div class="stats-number" id="totalSubmissions">0</div>
-    <div class="stats-actions">
-      <button class="clear-btn" onclick="clearSubmissions()">Clear All Submissions</button>
-    </div>
-  </div>
-
-  <div id="submissionsContainer">
-    <div class="no-submissions">
-      <h2>No submissions yet</h2>
-      <p>Contact form submissions will appear here.</p>
-    </div>
-  </div>
-</div>
-
 <script>
 let registered = localStorage.getItem("registeredCount");
 registered = registered ? parseInt(registered) : 0;
@@ -511,73 +495,7 @@ function updateDisplay() {
       passwordInput.focus();
     }
   }
-
-  function loadSubmissions() {
-    const submissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
-    const container = document.getElementById('submissionsContainer');
-    const totalSubmissions = document.getElementById('totalSubmissions');
-    
-    totalSubmissions.textContent = submissions.length;
-
-    if (submissions.length === 0) {
-      container.innerHTML = `
-        <div class="no-submissions">
-          <h2>No submissions yet</h2>
-          <p>Contact form submissions will appear here.</p>
-        </div>
-      `;
-      return;
-    }
-
-    // Sort by date (newest first)
-    submissions.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-    container.innerHTML = submissions.map(submission => {
-      const date = new Date(submission.date);
-      const formattedDate = date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-
-      // Create acceptance email body
-      const emailSubject = encodeURIComponent('Welcome to Tech Help by Zach!');
-      const emailBody = encodeURIComponent(`Hi ${submission.name},
-
-Great news! I'd love to have your child join my tech classes. 
-
-Based on your message:
-${submission.message}
-
-I think we'll have a great time learning together! Let's schedule a time that works for you. You can reply to this email or give me a call at 571-481-0357.
-
-Looking forward to working with you!
-
-Best,
-Zach`);
-
-      const mailtoLink = `mailto:${submission.email}?subject=${emailSubject}&body=${emailBody}`;
-
-      return `
-        <div class="submission-card">
-          <div class="submission-header">
-            <div class="submission-info">
-              <h3>${escapeHtml(submission.name)}</h3>
-              <div class="submission-date">${formattedDate}</div>
-            </div>
-            <a href="${mailtoLink}" class="email-btn">Send Acceptance Email</a>
-          </div>
-          <div class="submission-details">
-            <p><strong>Email:</strong> ${escapeHtml(submission.email)}</p>
-            <div class="submission-message">${escapeHtml(submission.message)}</div>
-          </div>
-        </div>
-      `;
-    }).join('');
-  }
-
+  
   function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
