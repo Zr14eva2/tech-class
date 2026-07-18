@@ -411,7 +411,6 @@ function deleteAppointment(index){
       // Hide password screen, show admin interface
       document.getElementById('passwordScreen').style.display = 'none';
       document.getElementById('adminInterface').classList.add('active');
-      loadSubmissions();
       loadAppointments();
     } else {
       // Show error and clear input
@@ -440,14 +439,5 @@ function deleteAppointment(index){
     }
   }
 
-  function clearSubmissions() {
-    if (confirm('Are you sure you want to clear all submissions? This action cannot be undone.')) {
-      localStorage.removeItem('contactSubmissions');
-      loadSubmissions();
-    }
-  }
-</script>
-
 </body>
 </html>
-
