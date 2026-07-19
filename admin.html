@@ -376,10 +376,25 @@ function addAppointment(){
     document.getElementById("appointmentTime").value="";
 }
 
-function deleteAppointment(index){
-    appointments.splice(index,1);
+function deleteAppointment(index) {
+    const appt = appointments[index];
+
+    const confirmed = confirm(
+        `Are you sure you want to delete this appointment?\n\n` +
+        `Name: ${appt.name}\n` +
+        `Date: ${appt.date}\n` +
+        `Time: ${appt.time}`
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    appointments.splice(index, 1);
     saveAppointments();
     loadAppointments();
+
+    alert("Appointment deleted successfully.");
 }
 
   const ADMIN_PASSWORD = 'Astronaut2014';
