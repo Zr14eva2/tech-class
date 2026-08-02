@@ -37,14 +37,6 @@
       color: #e5e7eb;
     }
 
-    .nav-logo a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: inherit;
-    }
-
     .nav-logo span {
       width: 36px;
       height: 36px;
@@ -57,7 +49,12 @@
       font-weight: bold;
     }
 
-    nav a {
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links a {
       color: #cbd5f5;
       text-decoration: none;
       margin-left: 16px;
@@ -65,12 +62,12 @@
       transition: color 0.3s ease;
     }
 
-    nav a:hover {
+    .nav-links a:hover {
       color: #38bdf8;
     }
 
     .container {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 40px auto;
       padding: 0 20px;
     }
@@ -225,25 +222,420 @@
       margin-bottom: 20px;
       text-align: center;
     }
-    
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+
+    header p {
+      color: #94a3b8;
+      font-size: 16px;
+      margin: 0;
     }
-    button:active {
-      transform: translateY(0);
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+
+    .admin-interface header {
+      animation: fadeUp 0.6s ease-out;
     }
-    #registered {
-      color: #38bdf8;
+
+    /* Scheduling layout */
+    .scheduling-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .scheduling-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .schedule-card {
+      background: rgba(15, 23, 42, 0.9);
+      padding: 28px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(56, 189, 248, 0.12);
+      animation: fadeUp 0.6s ease-out;
+    }
+
+    .schedule-card h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      font-size: 22px;
+    }
+
+    .schedule-card h2::before {
+      content: '';
+      width: 4px;
+      height: 22px;
+      border-radius: 2px;
+      background: linear-gradient(180deg, #38bdf8, #22d3ee);
+      flex-shrink: 0;
+    }
+
+    .schedule-form .form-group:last-of-type {
+      margin-bottom: 24px;
+    }
+
+    .schedule-form input[type="date"],
+    .schedule-form input[type="time"] {
+      color-scheme: dark;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .register-button {
+      background: linear-gradient(135deg, #f4682b, #d61818);
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-size: 15px;
       font-weight: bold;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(244, 104, 43, 0.3);
+      width: 100%;
+    }
+
+    .register-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(244, 104, 43, 0.5);
+    }
+
+    .register-button:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 15px rgba(244, 104, 43, 0.3);
+    }
+
+    .appointments-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .appointments-header h2 {
+      margin-bottom: 0;
+    }
+
+    .appointment-count {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    #appointmentList {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 520px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    #appointmentList::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #appointmentList::-webkit-scrollbar-track {
+      background: rgba(2, 6, 23, 0.5);
+      border-radius: 3px;
+    }
+
+    #appointmentList::-webkit-scrollbar-thumb {
+      background: rgba(56, 189, 248, 0.3);
+      border-radius: 3px;
+    }
+
+    #appointmentList::-webkit-scrollbar-thumb:hover {
+      background: rgba(56, 189, 248, 0.5);
+    }
+
+    .appointment-card {
+      background: rgba(2, 6, 23, 0.8);
+      padding: 18px 20px;
+      border-radius: 12px;
+      border-left: 4px solid #38bdf8;
+      transition: all 0.25s ease;
+    }
+
+    .appointment-card:hover {
+      background: rgba(2, 6, 23, 0.95);
+      transform: translateX(4px);
+      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.15);
+    }
+
+    .appointment-name {
+      font-size: 17px;
+      font-weight: 600;
+      color: #e5e7eb;
+      margin-bottom: 10px;
+    }
+
+    .appointment-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: #94a3b8;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    .appointment-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .unregister-button {
+      background: transparent;
+      color: #f87171;
+      border: 1px solid rgba(248, 113, 113, 0.4);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .unregister-button:hover {
+      background: rgba(248, 113, 113, 0.12);
+      border-color: #f87171;
+      transform: translateY(-1px);
+    }
+
+    .unregister-button:active {
+      transform: translateY(0);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      color: #64748b;
+      background: rgba(2, 6, 23, 0.5);
+      border-radius: 12px;
+      border: 1px dashed rgba(56, 189, 248, 0.2);
+    }
+
+    .empty-state-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+      opacity: 0.6;
+    }
+
+    .empty-state p {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    /* Google Calendar-style month view */
+    .calendar-section {
+      margin-top: 24px;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .calendar-section > .calendar-toolbar {
+      padding: 20px 24px 0;
+    }
+
+    .calendar-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .cal-btn {
+      background: rgba(2, 6, 23, 0.8);
+      color: #e5e7eb;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .cal-btn:hover {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: rgba(56, 189, 248, 0.45);
+    }
+
+    .cal-nav {
+      display: flex;
+      gap: 4px;
+    }
+
+    .cal-nav-btn {
+      padding: 8px 14px;
       font-size: 18px;
+      line-height: 1;
     }
-    #registered:hover {
-      color: #10b981;
+
+    .cal-title {
+      margin: 0 0 0 8px;
+      font-size: 22px;
+      font-weight: 500;
+      color: #e5e7eb;
     }
-    #registered:active {
-      color: #059669;
+
+    .cal-title::before {
+      display: none;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      border-top: 1px solid rgba(56, 189, 248, 0.15);
+      border-left: 1px solid rgba(56, 189, 248, 0.15);
+    }
+
+    .cal-day-header {
+      text-align: center;
+      padding: 12px 4px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      background: rgba(2, 6, 23, 0.6);
+      border-right: 1px solid rgba(56, 189, 248, 0.15);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+    }
+
+    .cal-day-cell {
+      min-height: 110px;
+      padding: 6px;
+      border-right: 1px solid rgba(56, 189, 248, 0.15);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+      background: rgba(2, 6, 23, 0.35);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      transition: background 0.15s ease;
+    }
+
+    .cal-day-cell:hover {
+      background: rgba(2, 6, 23, 0.55);
+    }
+
+    .cal-day-cell.other-month {
+      background: rgba(2, 6, 23, 0.15);
+    }
+
+    .cal-day-cell.other-month .cal-day-number {
+      color: #64748b;
+    }
+
+    .cal-day-cell.today {
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    .cal-day-number {
+      align-self: flex-end;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 500;
+      color: #cbd5f5;
+      border-radius: 50%;
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .cal-day-cell.today .cal-day-number {
+      background: #38bdf8;
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .cal-events {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .cal-event {
+      background: #1a73e8;
+      color: white;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      cursor: default;
+      line-height: 1.5;
+    }
+
+    .cal-event:nth-child(3n+2) {
+      background: #d61818;
+    }
+
+    .cal-event:nth-child(3n+3) {
+      background: #188038;
+    }
+
+    .cal-more {
+      font-size: 11px;
+      color: #94a3b8;
+      padding: 2px 4px;
+      cursor: default;
+    }
+
+    @media (max-width: 768px) {
+      .cal-day-cell {
+        min-height: 72px;
+        padding: 4px;
+      }
+
+      .cal-event {
+        font-size: 9px;
+        padding: 1px 4px;
+      }
+
+      .cal-day-number {
+        width: 22px;
+        height: 22px;
+        font-size: 11px;
+      }
+
+      .cal-title {
+        font-size: 18px;
+        width: 100%;
+        margin-left: 0;
+        margin-top: 4px;
+      }
     }
   </style>
 </head>
@@ -251,12 +643,10 @@
 
 <nav>
   <div class="nav-logo">
-    <a href="index.html">
-      <span>Z</span>
-      Zach Tech
-    </a>
+    <span>Z</span>
+    Zach Tech
   </div>
-  <div>
+  <div class="nav-links">
     <a href="index.html">Back to Site</a>
   </div>
 </nav>
@@ -281,78 +671,219 @@
 <div class="container admin-interface" id="adminInterface">
   <header>
     <h1>Admin Dashboard</h1>
-    <p>Shedule and register form submissions</p>
+    <p>Schedule and manage student appointments</p>
   </header>
-  
-  <div class="registered-container" style="flex-direction:column;height:auto;align-items:stretch;">
 
-  <h2>Schedule Appointment</h2>
+  <div class="scheduling-grid">
+    <div class="schedule-card schedule-form">
+      <h2>Schedule Appointment</h2>
+      <div class="form-group">
+        <label for="studentName">Student Name</label>
+        <input type="text" id="studentName" placeholder="Enter student name">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="appointmentDate">Date</label>
+          <input type="date" id="appointmentDate">
+        </div>
+        <div class="form-group">
+          <label for="appointmentTime">Time</label>
+          <input type="time" id="appointmentTime">
+        </div>
+      </div>
+      <button class="register-button" onclick="addAppointment()">Add Appointment</button>
+    </div>
 
-  <label>Name</label>
-  <input type="text" id="studentName" placeholder="Student Name">
+    <div class="schedule-card">
+      <div class="appointments-header">
+        <h2>Upcoming Appointments</h2>
+        <span class="appointment-count" id="appointmentCount">0 scheduled</span>
+      </div>
+      <div id="appointmentList"></div>
+    </div>
+  </div>
 
-  <label>Date</label>
-  <input type="date" id="appointmentDate">
-
-  <label>Time</label>
-  <input type="time" id="appointmentTime">
-
-  <button class="register-button" onclick="addAppointment()">
-    Add Appointment
-  </button>
-
-  <h2>Upcoming Appointments</h2>
-
-  <div id="appointmentList"></div>
-
+  <div class="schedule-card calendar-section">
+    <div class="calendar-toolbar">
+      <button class="cal-btn" id="todayBtn" type="button">Today</button>
+      <div class="cal-nav">
+        <button class="cal-btn cal-nav-btn" id="prevMonth" type="button" aria-label="Previous month">&#8249;</button>
+        <button class="cal-btn cal-nav-btn" id="nextMonth" type="button" aria-label="Next month">&#8250;</button>
+      </div>
+      <h2 class="cal-title" id="calendarTitle"></h2>
+    </div>
+    <div class="calendar-grid" id="calendarGrid"></div>
   </div>
 </div>
 
 <script>
 let appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+let calendarYear = new Date().getFullYear();
+let calendarMonth = new Date().getMonth();
+const MAX_EVENTS_PER_DAY = 3;
+const DAY_HEADERS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const MONTH_NAMES = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
 function saveAppointments() {
     localStorage.setItem("appointments", JSON.stringify(appointments));
 }
 
+function formatTime12(time24) {
+    const [hours, minutes] = time24.split(":");
+    const h = parseInt(hours, 10);
+    const ampm = h >= 12 ? "PM" : "AM";
+    const h12 = h % 12 || 12;
+    return `${h12}:${minutes} ${ampm}`;
+}
+
+function getAppointmentsByDate() {
+    const map = {};
+    appointments.forEach((appt) => {
+        if (!map[appt.date]) map[appt.date] = [];
+        map[appt.date].push(appt);
+    });
+    Object.values(map).forEach((dayAppts) => {
+        dayAppts.sort((a, b) => a.time.localeCompare(b.time));
+    });
+    return map;
+}
+
+function toDateKey(year, month, day) {
+    return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+}
+
+function renderCalendar() {
+    const grid = document.getElementById("calendarGrid");
+    const title = document.getElementById("calendarTitle");
+    if (!grid || !title) return;
+
+    title.textContent = `${MONTH_NAMES[calendarMonth]} ${calendarYear}`;
+
+    const today = new Date();
+    const todayKey = toDateKey(today.getFullYear(), today.getMonth(), today.getDate());
+    const byDate = getAppointmentsByDate();
+
+    const firstDay = new Date(calendarYear, calendarMonth, 1).getDay();
+    const daysInMonth = new Date(calendarYear, calendarMonth + 1, 0).getDate();
+    const daysInPrevMonth = new Date(calendarYear, calendarMonth, 0).getDate();
+
+    let html = DAY_HEADERS.map((d) => `<div class="cal-day-header">${d}</div>`).join("");
+
+    for (let i = firstDay - 1; i >= 0; i--) {
+        const day = daysInPrevMonth - i;
+        const prevMonth = calendarMonth === 0 ? 11 : calendarMonth - 1;
+        const prevYear = calendarMonth === 0 ? calendarYear - 1 : calendarYear;
+        html += buildDayCell(prevYear, prevMonth, day, true, todayKey, byDate);
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+        html += buildDayCell(calendarYear, calendarMonth, day, false, todayKey, byDate);
+    }
+
+    const totalCells = firstDay + daysInMonth;
+    const remaining = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+    for (let day = 1; day <= remaining; day++) {
+        const nextMonth = calendarMonth === 11 ? 0 : calendarMonth + 1;
+        const nextYear = calendarMonth === 11 ? calendarYear + 1 : calendarYear;
+        html += buildDayCell(nextYear, nextMonth, day, true, todayKey, byDate);
+    }
+
+    grid.innerHTML = html;
+}
+
+function buildDayCell(year, month, day, isOtherMonth, todayKey, byDate) {
+    const dateKey = toDateKey(year, month, day);
+    const isToday = dateKey === todayKey;
+    const dayAppts = byDate[dateKey] || [];
+    const visible = dayAppts.slice(0, MAX_EVENTS_PER_DAY);
+    const hiddenCount = dayAppts.length - visible.length;
+
+    let eventsHtml = visible.map((appt) =>
+        `<div class="cal-event" title="${escapeHtml(appt.name)} — ${formatTime12(appt.time)}">${formatTime12(appt.time)} ${escapeHtml(appt.name)}</div>`
+    ).join("");
+
+    if (hiddenCount > 0) {
+        eventsHtml += `<div class="cal-more">${hiddenCount} more</div>`;
+    }
+
+    const classes = [
+        "cal-day-cell",
+        isOtherMonth ? "other-month" : "",
+        isToday ? "today" : ""
+    ].filter(Boolean).join(" ");
+
+    return `
+        <div class="${classes}" data-date="${dateKey}">
+            <div class="cal-day-number">${day}</div>
+            <div class="cal-events">${eventsHtml}</div>
+        </div>`;
+}
+
+function changeMonth(delta) {
+    calendarMonth += delta;
+    if (calendarMonth > 11) {
+        calendarMonth = 0;
+        calendarYear++;
+    } else if (calendarMonth < 0) {
+        calendarMonth = 11;
+        calendarYear--;
+    }
+    renderCalendar();
+}
+
+function goToToday() {
+    const today = new Date();
+    calendarYear = today.getFullYear();
+    calendarMonth = today.getMonth();
+    renderCalendar();
+}
+
+function refreshViews() {
+    loadAppointments();
+    renderCalendar();
+}
+
 function loadAppointments() {
     const list = document.getElementById("appointmentList");
+    const countEl = document.getElementById("appointmentCount");
     list.innerHTML = "";
 
-    if (appointments.length === 0) {
-        list.innerHTML = "<p>No appointments scheduled.</p>";
+    const count = appointments.length;
+    countEl.textContent = count === 1 ? "1 scheduled" : `${count} scheduled`;
+
+    if (count === 0) {
+        list.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">📅</div>
+                <p>No appointments scheduled yet.<br>Add one using the form.</p>
+            </div>`;
         return;
     }
 
-    appointments.sort((a,b)=>
-        (a.date + a.time).localeCompare(b.date + b.time)
-    );
+    appointments
+        .map((appt, index) => ({ ...appt, originalIndex: index }))
+        .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time))
+        .forEach((appt) => {
+            const div = document.createElement("div");
+            div.className = "appointment-card";
 
-    appointments.forEach((appt,index)=>{
+            div.innerHTML = `
+                <div class="appointment-name">${escapeHtml(appt.name)}</div>
+                <div class="appointment-meta">
+                    <span>📅 ${escapeHtml(appt.date)}</span>
+                    <span>🕒 ${escapeHtml(appt.time)}</span>
+                </div>
+                <button class="unregister-button" onclick="deleteAppointment(${appt.originalIndex})">Delete</button>
+            `;
 
-        const div = document.createElement("div");
-        div.style.background = "rgba(2,6,23,.8)";
-        div.style.padding = "15px";
-        div.style.marginBottom = "10px";
-        div.style.borderRadius = "8px";
-        div.style.borderLeft = "4px solid #38bdf8";
-
-        div.innerHTML = `
-            <strong>${appt.name}</strong><br>
-            📅 ${appt.date}<br>
-            🕒 ${appt.time}
-            <br><br>
-            <button class="unregister-button" onclick="deleteAppointment(${index})">
-                Delete
-            </button>
-        `;
-
-        list.appendChild(div);
-    });
+            list.appendChild(div);
+        });
 }
 
 function addAppointment(){
-
     const name = document.getElementById("studentName").value.trim();
     const date = document.getElementById("appointmentDate").value;
     const time = document.getElementById("appointmentTime").value;
@@ -362,14 +893,10 @@ function addAppointment(){
         return;
     }
 
-    appointments.push({
-        name,
-        date,
-        time
-    });
+    appointments.push({ name, date, time });
 
     saveAppointments();
-    loadAppointments();
+    refreshViews();
 
     document.getElementById("studentName").value="";
     document.getElementById("appointmentDate").value="";
@@ -386,43 +913,43 @@ function deleteAppointment(index) {
         `Time: ${appt.time}`
     );
 
-    if (!confirmed) {
-        return;
-    }
+    if (!confirmed) return;
 
     appointments.splice(index, 1);
     saveAppointments();
-    loadAppointments();
+    refreshViews();
 
     alert("Appointment deleted successfully.");
 }
 
-  const ADMIN_PASSWORD = 'Astronaut2014';
+const ADMIN_PASSWORD = 'Astronaut2014';
 
-  function checkPassword(event) {
+function checkPassword(event) {
     event.preventDefault();
     const passwordInput = document.getElementById('password');
     const errorMessage = document.getElementById('errorMessage');
     const password = passwordInput.value;
 
     if (password === ADMIN_PASSWORD) {
-      // Hide password screen, show admin interface
-      document.getElementById('passwordScreen').style.display = 'none';
-      document.getElementById('adminInterface').classList.add('active');
-      loadAppointments();
+        document.getElementById('passwordScreen').style.display = 'none';
+        document.getElementById('adminInterface').classList.add('active');
+        refreshViews();
     } else {
-      // Show error and clear input
-      errorMessage.classList.add('show');
-      passwordInput.value = '';
-      passwordInput.focus();
+        errorMessage.classList.add('show');
+        passwordInput.value = '';
+        passwordInput.focus();
     }
-  }
-  
-  function escapeHtml(text) {
+}
+
+function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
-  }
+}
+
+document.getElementById("prevMonth").addEventListener("click", () => changeMonth(-1));
+document.getElementById("nextMonth").addEventListener("click", () => changeMonth(1));
+document.getElementById("todayBtn").addEventListener("click", goToToday);
 </script>
 </body>
 </html>
